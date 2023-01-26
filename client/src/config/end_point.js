@@ -1,0 +1,1 @@
+export const END_POINT = 'http://10.5.0.27:5558'

@@ -1,0 +1,57 @@
+.header{
+    height: 70px;
+    background-color: rgb(204 167 79 / 75%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    .logo{
+        width: 90px;
+        height: 90px;
+    }
+
+    &__login,
+    &__register,
+    &__btn-search{
+        padding: 10px;
+        border-radius: 8px;
+        // border-color: azure;
+        border:none;
+        background-color: cadetblue;
+        color: #fff;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+    &__login{
+        margin-right: 5px;
+    }
+
+    &__search{
+        width: 321px;
+        height: 38px;
+        padding: 0 5px 0 20px;
+        background: #FFFFFF;
+        border: 1px solid #E7E7E7;
+        border-radius: 8px
+    }
+
+    ::-webkit-input-placeholder { /* WebKit browsers */
+        color:    #000;
+        font-weight: 500;
+        font-size: 16px;
+     }
+
+    
+}
+
+.btn-desk{
+    padding: 5px;
+    border:none;
+    background: none;
+    cursor: pointer;
+    background-image: url(../images/header-btn.svg);
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 20px;
+}
