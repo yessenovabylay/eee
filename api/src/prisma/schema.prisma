@@ -1,0 +1,11 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["filterJson", "InteractiveTransactions"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      =  env("DATABASE_URL")
+}
+
+

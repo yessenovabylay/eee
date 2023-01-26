@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  client:
+    build: 
+      context: ./client
+      dockerfile: dockerfile.prod
+    container_name: library-docker-client
+    command: serve -s build -l 3000
+    restart: unless-stopped
+    networks:
+      - library-docker-network
+
+  api:
+    build: ./api
+    container_name: library-docker-api
+    command: npm run start
+    restart: unless-stopped
+    environment:
+      - PORT=3001
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/api
+    depends_on:
+      - api_db
+    networks:
+      - library-docker-network
+
+  api_db:
+    image: postgres:latest 
+    container_name: library-docker-api-db
+    volumes:
+      - postgres_api:/data/db
+    environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+    networks:
+      - library-docker-network
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: library-docker-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
+    depends_on:
+      - client
+      - api
+    networks:
+      - library-docker-network
+      
+volumes:
+  postgres_api:
+
+
+networks:
+  library-docker-network:
+    driver: bridge
